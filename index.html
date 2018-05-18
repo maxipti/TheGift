@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="img/gift.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Gift</title>
+</head>
+
+<body>
+    <header>
+        <a href="index.html">
+            <img class="logo" src="img/logo.png" alt="logo">
+        </a>
+    </header>
+    <main class="container d-flex justify-content-center">
+        <div class="main-info">
+            <h1>How it work</h1>
+            Do you want to please your family or friends? Give them a gift!
+            <br>
+            <br>
+            <p>This is simple:
+                <ol>
+                    <li>Specify the wallet that will receive the gift.</li>
+                    <li>Specify the amount of the gift and attach a message.</li>
+                    <li>Send the gift link to a friend!</li>
+                </ol>
+            </p>
+            <a class="btn btn-danger make-present-link" href="present.html">
+                <i class="fas fa-gift"></i>Make a present!</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Powered by Nebulas</span>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/7.0.1/bignumber.min.js"></script>
+    <script>
+        'use strict';
+        window.addEventListener("load", function () {
+            let isExtensionExist = typeof (webExtensionWallet) !== "undefined";
+            if (!isExtensionExist) {
+
+            }
+            else {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

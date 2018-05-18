@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="img/gift.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Gift</title>
+</head>
+
+<body>
+    <header>
+        <a href="index.html">
+            <img class="logo" src="img/logo.png" alt="logo">
+        </a>
+    </header>
+    <main class="container d-flex justify-content-center">
+        <div class="container present">
+            <!-- <h1>There's a present for you!</h1>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <button class="claim-gift">
+                    <div class="d-flex justify-content-center align-items-center present-head">
+                        <img class="present-logo" src="img/gift.png">
+                        <div class="amount">15000 NAS</div>
+                    </div>
+                </button>
+                <div class="hint">(Tap to pick up!)</div>
+            </div>
+
+            <div class="present-body">
+                <div class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod in impedit nesciunt explicabo fuga eius excepturi
+                    amet delectus beatae placeat.</div>
+                <div class="author">From Albert</div>
+            </div> -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Powered by Nebulas</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/7.0.1/bignumber.min.js"></script>
+    <script src="js/nebPay.js"></script>
+    <script src="js/contractApi.js"></script>
+    <script src="js/utils.js"></script>
+    <script>
+        'use strict';
+        window.addEventListener("load", function () {
+            let isExtensionExist = typeof (webExtensionWallet) !== "undefined";
+            if (!isExtensionExist) {
+
+            }
+            else {
+                let api = new GiftContract();
+                let searchParams = window.location.search;
+                if (searchParams) {
+                    let alias = searchParams.slice(1);
+
+                    api.getByAlias(alias, resp => {
+                        console.log(resp);
+                        if (resp && resp.result != '""') {
+                            let gift = JSON.parse(resp.result);
+                            $(".container.present").append(`<h1>There's a present for you!</h1>
+                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                <button class="claim-gift">
+                                                    <div class="d-flex justify-content-center align-items-center present-head">
+                                                        <img class="present-logo" src="img/gift.png">
+                                                        <div class="amount">${convertWeiToNas(gift.amount)} NAS</div>
+                                                    </div>
+                                                </button>
+                                                <div class="hint">(Tap to pick up!)</div>
+                                            </div>
+
+                                            <div class="present-body">
+                                                <div class="message">${gift.message}</div>
+                                                <div class="author">${gift.author ? "From " + gift.author : ""}</div>
+                                            </div>`);
+                            $(".claim-gift").click(() => {
+                                api.pickup(gift.alias);
+                            });
+
+                        }
+                        else {
+                            $('.container.present').replaceWith(`<div class="alert alert-warning no-data w-100 h-25 text-center" role="alert">Paste "${alias}" not found
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>`)
+                        }
+                    });
+                }
+                else {
+                    $('.container.present').replaceWith("");
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
